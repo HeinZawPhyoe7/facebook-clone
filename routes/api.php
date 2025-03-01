@@ -16,10 +16,11 @@ Route::group([
     Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('auth:api')->name('refresh');
     Route::post('/user-detail', [AuthController::class, 'userDetail'])->middleware('auth:api')->name('user-detail');
     Route::get('/user-all',[AuthController::class,'userAll'])->name('user-all');
+    Route::get('/user-all',[AuthController::class,'userAll'])->name('user-all');
 
     // postcontroller api
     Route::get('post-all',[PostController::class,'index'])->name('post-all');
-    Route::post('/create-post', [PostController::class, 'createPost'])->name('create-post');
-    Route::delete('/delete-post/{id}',[PostController::class, 'destroy'])->name('delete-post');
-    Route::post('/update-post/{id}',[PostController::class, 'updatePost'])->name('update-post');
+    Route::post('/create-post', [PostController::class, 'createPost'])->middleware('auth:api')->name('create-post');
+    Route::delete('/delete-post/{id}',[PostController::class, 'destroy'])->middleware('auth:api')->name('delete-post');
+    Route::post('/update-post/{id}',[PostController::class, 'updatePost'])->middleware('auth:api')->name('update-post');
 });
